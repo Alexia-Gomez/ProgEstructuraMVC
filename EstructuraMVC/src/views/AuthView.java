@@ -3,11 +3,14 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,9 +22,15 @@ import models.AuthModel;
 
 public class AuthView {
 	private JFrame frame;
- 	private JTextField textField;
- 	private JPasswordField passwordField;
  	private AuthModel functions;
+ 	
+ 	JPasswordField pass = new JPasswordField();
+ 	JTextField user = new JTextField();
+ 	
+ 	Font etiquetas2 = new Font("Nunito", Font.BOLD, 15); 
+	Font etiquetas3 = new Font("Nunito", Font.PLAIN, 16);
+	Font etiquetas4 = new Font("Nunito", Font.BOLD, 25);
+	Font botones = new Font("Nunito", Font.BOLD, 16);
  
  	public AuthView() {
  		
@@ -33,71 +42,138 @@ public class AuthView {
  		frame = new JFrame();
  		frame.setBounds(100, 100, 920, 534);
  		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
  		
- 		frame.setVisible(true);
- 		
- 		JPanel panel = new JPanel();
- 		panel.setBackground(new Color(255, 255, 255));
- 		frame.getContentPane().add(panel, BorderLayout.CENTER);
- 		panel.setLayout(null);
- 		
- 		JLabel titulo=new JLabel("INICIAR SESION");
- 		titulo.setBounds(200, 50, 200, 30);
- 		titulo.setFont(new Font("Nunito", Font.BOLD, 25));
- 		panel.add(titulo);
- 		
- 		JLabel usuario =new JLabel("Usuario:");
- 		usuario.setBounds(100, 150, 100, 20);
- 		usuario.setFont(new Font("Nunito", Font.BOLD, 15));
- 		panel.add(usuario);
- 		
- 		JTextField usuarioT =new  JTextField();
- 		usuarioT.setBounds(100, 180, 200, 20);
- 		usuarioT.setBackground(Color.gray);
- 		panel.add(usuarioT);
- 		
- 		JLabel contraseña =new JLabel("Contraseña:");
- 		contraseña.setBounds(100, 220, 100, 20);
- 		contraseña.setFont(new Font("Nunito", Font.BOLD, 15));
- 		panel.add(contraseña);
- 		
- 		JTextField contraseñaT =new  JTextField();
- 		contraseñaT.setBounds(100, 250, 200, 20);
- 		contraseñaT.setBackground(Color.gray);
- 		panel.add(contraseñaT);
- 		
- 		JButton acceder =new JButton("Acceder");
- 		acceder.setBackground(Color.blue);
- 		acceder.setOpaque(true);
- 		acceder.setForeground(Color.white);
- 		acceder.setFont(new Font("Nunito", Font.BOLD, 15));
- 		acceder.setBounds(150, 300, 100, 30);
- 		acceder.addActionListener(new ActionListener() {
+ 		JPanel login = new JPanel();
+		login.setBounds(0,0,700,600);
+		login.setOpaque(true);
+		login.setBackground(Color.WHITE);
+		login.setVisible(true);
+		login.setLayout(null);
+		frame.getContentPane().add(login, BorderLayout.CENTER);
+		
+		//TITULO
+		JLabel etiqueta1 = new JLabel("Iniciar Sesión");
+		etiqueta1.setBounds(245, 120, 200, 40);
+		etiqueta1.setForeground(new Color(10, 73, 143));
+		etiqueta1.setBackground(Color.WHITE);
+		etiqueta1.setOpaque(true);
+		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+		etiqueta1.setFont(new Font("Nunito", Font.BOLD, 30));
+		login.add(etiqueta1);
+		
+		
+		//ICONO USUARIO
+		ImageIcon usuario = new ImageIcon(AuthView.class.getResource("/views/usuario1.png"));
+		JLabel usuario_icon = new JLabel();
+		usuario_icon.setBounds(150, 210, 40, 40);
+		usuario_icon.setIcon(new ImageIcon(usuario.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+		login.add(usuario_icon);
+		
+		//USUARIO
+		JLabel etiqueta2 = new JLabel("Usuario:");
+		etiqueta2.setBounds(190, 180, 160, 30);
+		etiqueta2.setBackground(Color.WHITE);
+		etiqueta2.setForeground(new Color(4, 83, 125));
+		etiqueta2.setOpaque(true);
+		etiqueta2.setFont(etiquetas2);
+		login.add(etiqueta2);
+		
+		user = new JTextField();	
+		user.setBounds(190, 215, 330, 30);
+		user.setBackground(new Color(237, 237, 237 ));
+		user.setOpaque(true);
+		user.setFont(etiquetas3);
+		login.add(user);
+		
+		
+		
+		//ICONO CONTRASEÑA
+		ImageIcon contraseña = new ImageIcon(AuthView.class.getResource("/views/contraseña.png"));
+		JLabel contraseña_icon = new JLabel();
+		contraseña_icon.setBounds(150, 290, 40, 40);
+		contraseña_icon.setIcon(new ImageIcon(contraseña.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+		login.add(contraseña_icon);
+		
+		
+		//CONTRASEÑA
+		JLabel etiqueta3 = new JLabel("Contraseña:");
+		etiqueta3.setBounds(190, 260, 160, 30);
+		etiqueta3.setBackground(Color.WHITE);
+		etiqueta3.setForeground(new Color(4, 83, 125));
+		etiqueta3.setOpaque(true);
+		etiqueta3.setFont(etiquetas2);
+		login.add(etiqueta3);
+		
+		pass = new JPasswordField();
+		pass.setBounds(190, 295, 330, 30);
+		pass.setBackground(new Color(237, 237, 237 ));
+		pass.setOpaque(true);
+		pass.setFont(etiquetas3);
+		login.add(pass);
+		
+		
+		//RECORDAR CONTRASEÑA
+		JCheckBox box = new JCheckBox();
+		box.setBounds(190, 330, 25, 30);
+		box.setBackground(Color.WHITE);
+		box.setOpaque(true);
+		login.add(box);
+				
+		JLabel etiqueta4 = new JLabel("Recuérdame");
+		etiqueta4.setBounds(215, 330, 120, 30);
+		etiqueta4.setBackground(Color.WHITE);
+		etiqueta4.setForeground(new Color(4, 83, 125));
+		etiqueta4.setOpaque(true);
+		etiqueta4.setFont(new Font("Nunito", Font.PLAIN, 12));
+		login.add(etiqueta4);
+				
+	
+				
+		//RECUPERAR CONTRASEÑA
+		JLabel etiqueta5 = new JLabel("¿Has perdido tu contraseña?");
+		etiqueta5.setBounds(360, 330, 160, 30);
+		etiqueta5.setBackground(Color.WHITE);
+		etiqueta5.setForeground(new Color(4, 83, 125));
+		etiqueta5.setOpaque(true);
+		etiqueta5.setFont(new Font("Nunito", Font.ITALIC, 12));
+		login.add(etiqueta5);
+		
+		
+				
+		//BOTON ACCEDER
+		JButton acceder = new JButton("Acceder");
+		acceder.setBounds(370, 390, 150, 35);
+		acceder.setBackground(new Color(10, 73, 143) );
+		acceder.setForeground(Color.white);
+		acceder.setOpaque(true);
+		acceder.setFont(new Font("Nunito", Font.BOLD, 15));
+		acceder.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String passText = new String(passwordField.getPassword());
- 				Boolean flag1 = false, flag2 = false;
+				Boolean flag1 = false, flag2 = false;
+				String passText = new String(((JPasswordField) pass).getPassword());
+ 				String username = user.getText();
+ 				registro(username, passText);
  				
- 				String username = usuarioT.getText();
- 				
- 				if( contraseñaT.equals("") ) {
+ 				if(passText.equals("") ) {
  					
- 					contraseñaT.setBorder(BorderFactory.createLineBorder(Color.red,2));
+ 					pass.setBorder(BorderFactory.createLineBorder(Color.red,2));
  					
  				}else {
  					
- 					contraseñaT.setBorder(BorderFactory.createLineBorder(Color.green,2));
+ 					pass.setBorder(BorderFactory.createLineBorder(Color.green,2));
  					flag1 = true;
  				}
  				
  				
- 				if(usuarioT.getText().equals("")) {
- 					textField.setBorder(BorderFactory.createLineBorder(Color.red,2));
+ 				if(username.equals("")) {
+ 					user.setBorder(BorderFactory.createLineBorder(Color.red,2));
  				}else {
  					
- 					usuarioT.setBorder(BorderFactory.createLineBorder(Color.green,2));
+ 					user.setBorder(BorderFactory.createLineBorder(Color.green,2));
  					flag2 = true;
  				}
  				
@@ -111,7 +187,7 @@ public class AuthView {
  						JOptionPane.showMessageDialog(frame, "Bienvenido.");
  						
  					}else {
- 						JOptionPane.showMessageDialog(frame, "Error al acceder","verifique su información",JOptionPane.WARNING_MESSAGE);
+ 						JOptionPane.showMessageDialog(frame, "Error al acceder","Verifique su información",JOptionPane.WARNING_MESSAGE);
  					}
  					 	
  				}
@@ -119,9 +195,44 @@ public class AuthView {
  			}
  			
  		});
+		login.add(acceder);
+		
+		//CREAR CUENTA
+		JButton btn_b = new JButton("Crear cuenta");
+		btn_b.setBounds(190, 390, 150, 35);
+		btn_b.setBackground(Color.white);
+		btn_b.setForeground(new Color(4, 83, 125));
+		btn_b.setOpaque(true);
+		btn_b.setFont(new Font("Nunito", Font.BOLD, 15));
+		login.add(btn_b);
+		
+		//FONDO1
+		JLabel fondo1 = new JLabel();
+		fondo1.setBounds(100, 80, 480, 400);
+		fondo1.setBackground(Color.white);
+		fondo1.setOpaque(true);
+		login.add(fondo1);
+				
+				
+		//FONDO
+		ImageIcon fondo = new ImageIcon(AuthView.class.getResource("/views/fondo.png"));
+		JLabel fondo_img = new JLabel();
+		fondo_img.setBounds(0, 0, 700, 600);
+		fondo_img.setIcon(fondo);
+		login.add(fondo_img);
+		
+		
+		frame.setVisible(true);	
+		login.revalidate();
+		
  		
- 		panel.add(acceder);
+ 	}
+ 	
+ 	public void registro(String usuario, String contraseña ) {
+ 		String userT = user.getText();
+ 		String passT = new String(pass.getPassword()) ;
  		
+ 		System.out.println("Usuario: "+userT+"\nContraseña:"+passT);
  	}
  	
  			
