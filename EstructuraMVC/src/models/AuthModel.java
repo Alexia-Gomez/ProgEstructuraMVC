@@ -1,53 +1,43 @@
 package models;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 public class AuthModel {
 	public AuthModel() {
 		
 	}
 	
 	public boolean acccess(String u, String p) {
-		
-		/*try{
-		 * 	Strng url = AuthModel.class.getsource("/files/fhfnd.txt").getPath();
-		 * 	FileReader fileReader = new FileReader(url);
-		 * 
-		 * int i;
-		 * 
-		 * while((i=fileReader.read()) != -1){
-		 * 	system.out.println((char)i);
-		 * 	
-		 *convertir row en string  y cortar el string con split. comparar con el arreglo en la pos 1, 2 (correo y contraseña)
-		 *
-		 * if(u.equals("admin")) {
-			if(p.equals("1234")) {
-				return true;
-			}
-		 * }
-		 * 
-		 * 
-		 * 
-		 * fileReader.close();
-		 * 
-		 * } catch (Exception e){
-		 * 
-		 * 	e.printStackTrace();
-		 * system.out.println("error");
-		 * 
-		 * }
-		 * 
-		 * terminer login
-		 * 
-		 * hacer un escribir (file writer)
-		 * */
-		
-		if(u.equals("admin")) {
-			if(p.equals("1234")) {
-				return true;
-			}else {
-				return false;
-			}
-		}else {
-			return false;
-		}
-	}
+		try {
+            File file = new File(AuthModel.class.getResource("/files/users.txt").toURI());
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            String linea;
+
+            while ((linea = reader.readLine()) != null) {
+            	
+            	String[] div = linea.split(",");
+
+            	String fileUser = div[1].trim();
+            	String filePass = div[2].trim();
+
+            	if (u.equals(fileUser) && p.equals(filePass)) {
+            		reader.close();
+            		return true; 
+            	}
+            }
+
+            reader.close();
+            return false;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error");
+        }
+
+        return false;
+    }
+	
 }

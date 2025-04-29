@@ -26,6 +26,10 @@ public class AuthView {
  	
  	JPasswordField pass = new JPasswordField();
  	JTextField user = new JTextField();
+ 	JPanel home = new JPanel();
+ 	JPanel login = new JPanel();
+ 	
+ 	ImageIcon fondo = new ImageIcon(AuthView.class.getResource("/views/fondo.png"));
  	
  	Font etiquetas2 = new Font("Nunito", Font.BOLD, 15); 
 	Font etiquetas3 = new Font("Nunito", Font.PLAIN, 16);
@@ -34,23 +38,26 @@ public class AuthView {
  
  	public AuthView() {
  		
+ 		frame = new JFrame();
+ 		frame.setBounds(100, 100, 700, 600);
+ 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 		
  		functions = new AuthModel();
  	}
  	
+ 	
+ 	
  	public void login()
  	{
- 		frame = new JFrame();
- 		frame.setBounds(100, 100, 920, 534);
- 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
  		
- 		JPanel login = new JPanel();
+ 		login = new JPanel();
 		login.setBounds(0,0,700,600);
 		login.setOpaque(true);
 		login.setBackground(Color.WHITE);
 		login.setVisible(true);
 		login.setLayout(null);
 		frame.getContentPane().add(login, BorderLayout.CENTER);
+		frame.setVisible(true);
 		
 		//TITULO
 		JLabel etiqueta1 = new JLabel("Iniciar Sesión");
@@ -154,7 +161,7 @@ public class AuthView {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Boolean flag1 = false, flag2 = false;
-				String passText = new String(((JPasswordField) pass).getPassword());
+				String passText = new String(pass.getPassword());
  				String username = user.getText();
  				registro(username, passText);
  				
@@ -185,9 +192,11 @@ public class AuthView {
  					if(user_auth) {
  						
  						JOptionPane.showMessageDialog(frame, "Bienvenido.");
+ 						frame.getContentPane().removeAll();
+ 						home();
  						
  					}else {
- 						JOptionPane.showMessageDialog(frame, "Error al acceder","Verifique su información",JOptionPane.WARNING_MESSAGE);
+ 						JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos","Verifique su información",JOptionPane.WARNING_MESSAGE);
  					}
  					 	
  				}
@@ -215,17 +224,73 @@ public class AuthView {
 				
 				
 		//FONDO
-		ImageIcon fondo = new ImageIcon(AuthView.class.getResource("/views/fondo.png"));
 		JLabel fondo_img = new JLabel();
 		fondo_img.setBounds(0, 0, 700, 600);
 		fondo_img.setIcon(fondo);
 		login.add(fondo_img);
 		
-		
-		frame.setVisible(true);	
-		login.revalidate();
-		
+		frame.revalidate();
+		frame.repaint();
+	
+ 	}
+ 	
+ 	public void home() {
+ 		//FONDO1
+ 		home = new JPanel();
+ 		home.setBounds(0,0,700,600);
+ 		home.setOpaque(true);
+ 		home.setBackground(Color.WHITE);
+ 		home.setVisible(true);
+ 		home.setLayout(null);
  		
+
+ 		//TITULO
+ 		JLabel etiqueta1 = new JLabel("HOME");
+ 		etiqueta1.setBounds(245, 120, 200, 40);
+ 		etiqueta1.setForeground(new Color(10, 73, 143));
+ 		etiqueta1.setBackground(Color.WHITE);
+ 		etiqueta1.setOpaque(true);
+ 		etiqueta1.setHorizontalAlignment(JLabel.CENTER);
+ 		etiqueta1.setFont(new Font("Nunito", Font.BOLD, 30));
+ 		home.add(etiqueta1);
+ 		
+ 		
+ 		//CREAR CUENTA
+ 		JButton regresar = new JButton("Regresar");
+ 		regresar.setBounds(190, 390, 150, 35);
+ 		regresar.setBackground(Color.white);
+ 		regresar.setForeground(new Color(4, 83, 125));
+ 		regresar.setOpaque(true);
+ 		regresar.setFont(new Font("Nunito", Font.BOLD, 15));
+ 		regresar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.getContentPane().removeAll();
+				login();
+			}
+ 			
+ 		});
+ 		home.add(regresar);
+
+ 		JLabel fondo1 = new JLabel();
+ 		fondo1.setBounds(100, 80, 480, 400);
+ 		fondo1.setBackground(Color.white);
+ 		fondo1.setOpaque(true);
+ 		home.add(fondo1);
+
+
+ 		//FONDO
+ 		JLabel fondo_img = new JLabel();
+ 		fondo_img.setBounds(0, 0, 700, 600);
+ 		fondo_img.setIcon(fondo);
+ 		home.add(fondo_img);
+ 		
+ 		frame.add(home);
+ 		frame.revalidate();
+ 		frame.repaint();
+
  	}
  	
  	public void registro(String usuario, String contraseña ) {
