@@ -23,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import controllers.HomeController;
 import models.AuthModel;
 
 public class AuthView {
@@ -51,8 +52,6 @@ public class AuthView {
  		
  		functions = new AuthModel();
  	}
- 	
- 	
  	
  	public void login()
  	{
@@ -200,8 +199,11 @@ public class AuthView {
  						
  						JOptionPane.showMessageDialog(frame, "Bienvenido.");
  						frame.getContentPane().removeAll();
- 						home();
+ 						//frame.dispose();
+ 						//HomeController hc = new HomeController();
  						
+ 						frame.getContentPane().removeAll();
+ 						home();
  					}else {
  						JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos","Verifique su información",JOptionPane.WARNING_MESSAGE);
  					}
@@ -250,9 +252,9 @@ public class AuthView {
 		frame.repaint();
 	
  	}
- 	
+
  	public void home() {
- 		//FONDO1
+		//FONDO1
  		home = new JPanel();
  		home.setBounds(0,0,700,600);
  		home.setOpaque(true);
@@ -271,25 +273,91 @@ public class AuthView {
  		etiqueta1.setFont(new Font("Nunito", Font.BOLD, 30));
  		home.add(etiqueta1);
  		
+ 		JLabel wUsers = new JLabel("150");
+ 		wUsers.setBounds(160, 200,100, 40);
+ 		wUsers.setBackground(Color.white);
+ 		wUsers.setOpaque(true);
+ 		wUsers.setFont(new Font("Nunito", Font.BOLD, 20));
+ 		wUsers.setForeground(new Color(4, 83, 125));
+ 		wUsers.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+ 		ImageIcon userC = new ImageIcon(AuthView.class.getResource("/images/usuario1.png"));
+ 		wUsers.setIcon(new ImageIcon(userC.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+ 		home.add(wUsers);
  		
- 		//CREAR CUENTA
- 		JButton regresar = new JButton("Regresar");
- 		regresar.setBounds(190, 390, 150, 35);
- 		regresar.setBackground(Color.white);
- 		regresar.setForeground(new Color(4, 83, 125));
- 		regresar.setOpaque(true);
- 		regresar.setFont(new Font("Nunito", Font.BOLD, 15));
- 		regresar.addActionListener(new ActionListener() {
+ 		JLabel wNoti = new JLabel("(10)");
+ 		wNoti.setBounds(160, 260, 100, 40);
+ 		wNoti.setBackground(Color.white);
+ 		wNoti.setOpaque(true);
+ 		wNoti.setFont(new Font("Nunito", Font.BOLD, 20));
+ 		wNoti.setForeground(new Color(4, 83, 125));
+ 		wNoti.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+ 		ImageIcon noti = new ImageIcon(AuthView.class.getResource("/images/mensaje.png"));
+ 		wNoti.setIcon(new ImageIcon(noti.getImage().getScaledInstance(35,35, Image.SCALE_SMOOTH)));
+ 		home.add(wNoti);
+ 		
+ 		JLabel wTime = new JLabel("  10:26");
+ 		wTime.setBounds(280, 200, 110, 100);
+ 		wTime.setBackground(Color.white);
+ 		wTime.setOpaque(true);
+ 		wTime.setFont(new Font("Nunito", Font.BOLD, 29));
+ 		wTime.setForeground(new Color(4, 83, 125));
+ 		wTime.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+ 		home.add(wTime);
+ 		
+ 		JLabel wStats = new JLabel();
+ 		wStats.setBounds(410, 200, 110, 100);
+ 		wStats.setBackground(Color.white);
+ 		wStats.setBorder(BorderFactory.createLineBorder(Color.gray, 2));
+ 		wStats.setOpaque(true);
+ 		ImageIcon stat = new ImageIcon(AuthView.class.getResource("/images/stats.png"));
+ 		wStats.setIcon(new ImageIcon(stat.getImage().getScaledInstance(110, 100, Image.SCALE_SMOOTH)));
+ 		home.add(wStats);
+ 		
+ 		JButton usuarios = new JButton("Usuarios");
+		usuarios.setBounds(160, 350, 110, 35);
+		usuarios.setBackground(new Color(4, 83, 125));
+		usuarios.setForeground(Color.white);
+		usuarios.setOpaque(true);
+		usuarios.setFont(new Font("Nunito", Font.BOLD, 12));
+		usuarios.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				frame.getContentPane().removeAll();
-				login();
+				JOptionPane.showMessageDialog(frame, "ventana de usuarios");
 			}
- 			
- 		});
- 		home.add(regresar);
+		});
+		home.add(usuarios);
+		
+		JButton registros = new JButton("Registros");
+		registros.setBounds(280, 350, 110, 35);
+		registros.setBackground(new Color(4, 83, 125));
+		registros.setForeground(Color.white);
+		registros.setOpaque(true);
+		registros.setFont(new Font("Nunito", Font.BOLD, 12));
+		registros.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "ventana de registros");
+			}
+		});
+		home.add(registros);
+		
+		JButton conf = new JButton("Configuración");
+		conf.setBounds(400, 350, 120, 35);
+		conf.setBackground(new Color(4, 83, 125));
+		conf.setForeground(Color.white);
+		conf.setOpaque(true);
+		conf.setFont(new Font("Nunito", Font.BOLD, 12));
+		conf.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(frame, "ventana de configuración");
+			}
+		});
+		home.add(conf);
+ 		
 
  		JLabel fondo1 = new JLabel();
  		fondo1.setBounds(100, 80, 480, 400);
@@ -306,9 +374,8 @@ public class AuthView {
  		
  		frame.add(home);
  		frame.revalidate();
- 		frame.repaint();
-
- 	}
+		frame.repaint();
+	}
  	
  	public void register() {
  		
