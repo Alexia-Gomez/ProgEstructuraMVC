@@ -9,6 +9,9 @@ public class HomeController {
 	public HomeController() {
 		view = new HomeView();
 	}
-
+	
+	public void home() {
+		view.home();
+	}
 	
 }
