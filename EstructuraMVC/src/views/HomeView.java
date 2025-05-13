@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controllers.ProductController;
+
 public class HomeView {
 	
 	ImageIcon fondo = new ImageIcon(AuthView.class.getResource("/images/fondo.png"));
@@ -100,7 +102,7 @@ public class HomeView {
 		});
 		home.add(usuarios);
 		
-		JButton registros = new JButton("Registros");
+		JButton registros = new JButton("Productos");
 		registros.setBounds(280, 350, 110, 35);
 		registros.setBackground(new Color(4, 83, 125));
 		registros.setForeground(Color.white);
@@ -110,7 +112,10 @@ public class HomeView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(ventana, "ventana de registros");
+				ventana.dispose();
+				
+				ProductController pc= new ProductController();
+				pc.products();
 			}
 		});
 		home.add(registros);

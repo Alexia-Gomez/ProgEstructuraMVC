@@ -198,10 +198,10 @@ public class AuthView {
  					if(user_auth) {
  						
  						JOptionPane.showMessageDialog(frame, "Bienvenido.");
- 						//frame.getContentPane().removeAll();
  						frame.dispose();
  						HomeController hc = new HomeController();
  						hc.home();
+ 						
  					}else {
  						JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos","Verifique su información",JOptionPane.WARNING_MESSAGE);
  					}
@@ -250,7 +250,7 @@ public class AuthView {
 		frame.repaint();
 	
  	}
-
+ 
  	public void register() {
  		
  		register = new JPanel();
